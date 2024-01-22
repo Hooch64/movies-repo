@@ -1,0 +1,63 @@
+header {
+    background-image: url("../images/bandeau-header-long.png");
+    background-size: 180%;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+
+    .headerWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bandeauContent {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: -17px;
+
+
+        .logo img {
+            border-radius: 50%;
+            box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .searchBar {
+            position: relative;
+            width: 350px;
+            height: 35px;
+            border-radius: 20px;
+            font-size: 16px;
+            padding: 0 12px;
+            outline: none;
+        }
+
+        .submit {
+            position: absolute;
+            left: 840px;
+            background-color: #ffffff00;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .sub {
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        #sub1 {
+            margin-right: 20px;
+        }
+    }
+}

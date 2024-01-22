@@ -1,0 +1,40 @@
+// On ajoute ici les variables 
+// :root {
+//    --primary-color: #2574f1
+// }
+// $title-font: 'Roboto', sans-serif;
+
+@import '_reset';
+// @import '_default';
+// @import '_footer';
+// @import '_home';
+// @import '_contact';
+@import '_header';
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    background-color: #970000;
+    font-family: 'Nanum Gothic', sans-serif;
+
+    p {
+        color: #f0b835;
+    }
+}
+
+#carouselExampleControls {
+    width: 60%;
+}
