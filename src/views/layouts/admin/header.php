@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">Movies</a>
+                            <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">Films</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<?= $router->generate('moviesList') ?>"> Liste des films</a></li>
                                 <li><a class="dropdown-item" href="<?= $router->generate('moviesEdit') ?>"> Ajouter un film</a></li>
@@ -28,9 +28,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">Utilisateurs</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"> Submenu item 1</a></li>
-                                <li><a class="dropdown-item" href="#"> Submenu item 2 </a></li>
-                                <li><a class="dropdown-item" href="#"> Submenu item 3 </a></li>
+                                <li><a class="dropdown-item" href="<?= $router->generate('userList') ?>"> Liste des utilisateurs</a></li>
+                                <li><a class="dropdown-item" href="<?= $router->generate('addUser') ?>"> Ajouter un utilisateur </a></li>
                             </ul>
                         </li>
                     </ul>

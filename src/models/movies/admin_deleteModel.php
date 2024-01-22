@@ -15,4 +15,3 @@ function deleteMovie()
         die;
     }
 }
-deleteMovie();

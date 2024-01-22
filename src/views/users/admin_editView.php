@@ -13,7 +13,7 @@
     <div class="mb-4">
         <?php $error = checkEmptyFields('pwd'); ?>
         <label for="pwd" class="form-label">Mot de passe : *</label>
-        <input type="password" name="pwd" id="pwd" class="form-control <?= $error['class']; ?>">
+        <input type="password" name="pwd" id="pwd" value="Testtest2024!" class="form-control <?= $error['class']; ?>">
         <p class="form-text mb-0">la règle des mdp</p>
         <?= $error['message']; ?>
         <?= $errorMessage['pwd']; ?>
@@ -21,7 +21,7 @@
     <div class="mb-4">
         <?php $error = checkEmptyFields('pwd-conf'); ?>
         <label for="pwd-conf" class="form-label">Confirmation mot de passe : *</label>
-        <input type="password" name="pwd-conf" id="pwd-conf" class="form-control <?= $error['class']; ?>">
+        <input type="password" name="pwd-conf" id="pwd-conf" value="Testtest2024!" class="form-control <?= $error['class']; ?>">
         <?= $error['message']; ?>
         <?= $errorMessage['pwd-conf'] ?>
     </div>

@@ -9,9 +9,9 @@ $router->map('GET|POST', $admin . '/connexion', 'users/admin_login', 'logInAdmin
 $router->map('GET', $admin . '/deconnexion', 'logOutAdmin', 'logOutAdmin'); // 4 
 $router->map('GET', $admin . '/mdp-oublie', 'forgottenPasswordAdmin', 'lostPassword'); // 7
 $router->map('GET', $admin . '/utilisateurs', 'users/admin_list', 'userList'); // 1 (SELECT & foreach)
-$router->map('GET|POST', $admin . '/utilisateurs/editer/[uuid:id]', 'users/admin_edit', ''); // 2 / 5 (modif)
-$router->map('GET|POST', $admin . '/utilisateurs/editer', 'users/admin_edit', ''); // 2 / 5 (modif)
-$router->map('GET', $admin . '/utilisateurs/supprimer/[i:id]', 'deleteUser', 'deleteUser'); // 6
+$router->map('GET|POST', $admin . '/utilisateurs/editer/[uuid:id]', 'users/admin_edit', 'userEdit'); // 2 / 5 (modif)
+$router->map('GET|POST', $admin . '/utilisateurs/editer', 'users/admin_edit', 'addUser'); // 2 / 5 (modif)
+$router->map('GET', $admin . '/utilisateurs/supprimer/[uuid:id]', 'users/admin_delete', 'deleteUser'); // 6
 
 //gestion films
 $router->map('GET', $admin . '/film/liste', 'movies/admin_list', 'moviesList');
