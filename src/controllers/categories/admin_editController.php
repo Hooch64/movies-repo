@@ -24,8 +24,6 @@ if (!empty($_POST)) {
 
             alert('Catégorie ajouté avec succès.', 'success');
             addCategory();
-
-            unset($_POST['email']);
         } else {
             alert('Erreur lors de l\'ajout de la catégorie.');
         }

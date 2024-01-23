@@ -20,6 +20,6 @@ $router->map('GET|POST', $admin . '/film/editer', 'movies/admin_edit', 'moviesEd
 $router->map('GET', $admin . '/film/supprimer/[i:id]', 'movies/admin_delete', 'moviesDelete');
 
 //categories
-$router->map('GET', $admin . '/categories', 'genreList', 'genreList');
-$router->map('GET|POST', $admin . '/categories/editer', 'categories/admin_edit', 'editGenre');
-$router->map('GET', $admin . '/categories/supprimer/[i:id]', 'deleteGenre', 'deleteGenre');
+$router->map('GET', $admin . '/categories', 'categories/admin_list', 'categoriesList');
+$router->map('GET|POST', $admin . '/categories/editer', 'categories/admin_edit', 'editCategory');
+$router->map('GET', $admin . '/categories/supprimer/[i:id]', 'categories/admin_delete', 'deleteCategory');

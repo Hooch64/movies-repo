@@ -32,6 +32,13 @@
                                 <li><a class="dropdown-item" href="<?= $router->generate('addUser') ?>"> Ajouter un utilisateur </a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">Catégories</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="<?= $router->generate('categoriesList') ?>"> Liste des catégories</a></li>
+                                <li><a class="dropdown-item" href="<?= $router->generate('editCategory') ?>"> Ajouter une catégorie </a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <div class="navbar-text">
                         <a href="" class="btn btn-danger">Déconnexion</a>
