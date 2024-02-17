@@ -1,63 +1,61 @@
 header {
-    background-image: url("../images/bandeau-header-long.png");
-    background-size: 180%;
-    background-repeat: no-repeat;
+    background: url("../images/bandeau-header-long.png") no-repeat top center;
+    background-size: cover;
+    margin-bottom: 50px;
     margin-top: 30px;
 
-    .headerWrapper {
+    .wrapper {
         display: flex;
         flex-wrap: wrap;
-        max-width: 1200px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding-top: 25px;
+        padding-bottom: 25px;
     }
 
-    .bandeauContent {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: -17px;
+    .logo {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 9;
 
-
-        .logo img {
+        img {
             border-radius: 50%;
-            box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.7);
-        }
+            box-shadow: 0px 0px 8px 2px #000000;
+            transition: .3s ease transform, .3s ease box-shadow;
 
-        form {
-            display: flex;
-            flex-wrap: wrap;
+            &:hover,
+            &:focus {
+                transform: scale(1.04);
+                box-shadow: 0px 0px 18px 2px #000000;
+            }
         }
+    }
 
-        .searchBar {
-            position: relative;
-            width: 350px;
-            height: 35px;
+    form {
+        position: relative;
+        width: 350px;
+
+        .search-bar {
             border-radius: 20px;
-            font-size: 16px;
-            padding: 0 12px;
-            outline: none;
+            padding: 10px 50px 10px 12px;
+            border: none;
+            width: 100%;
         }
 
         .submit {
             position: absolute;
-            left: 840px;
-            background-color: #ffffff00;
-            border: 0;
-            cursor: pointer;
-        }
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            border: none;
+            background-color: transparent;
 
-        .sub {
-            color: #fff;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        #sub1 {
-            margin-right: 20px;
+            svg {
+                height: 30px;
+            }
         }
     }
 }

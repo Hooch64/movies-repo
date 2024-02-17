@@ -1,0 +1,14 @@
+// equivalent fonction pour normaliser les param css de tous les elements sur lesquels ils sont appliqués
+// @mixin button {}
+@use "sass:math";
+
+/** Font size convert **/
+@function calculateRem($size) {
+    $remSize: math.div($size, 16px);
+    @return #{$remSize}rem;
+}
+
+@mixin fontSize($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}

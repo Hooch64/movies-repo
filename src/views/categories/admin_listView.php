@@ -22,7 +22,7 @@ get_header('Liste des catégories', 'admin'); ?>
         <?php foreach ($categories as $category) {
             if (empty($_GET['search']) || (!empty($_GET['search']) && searchByName($category->cat, $_GET['search']))) { ?>
                 <tr>
-                    <td class="align-middle"><a href="<?= $router->generate('editCategory', ['id' =>  $category->id]); ?>"><?= $category->cat; ?></a></td>
+                    <td class="align-middle"><?= $category->cat; ?></td>
                     <td class="align-middle"><?= $category->created; ?></td>
                     <td class="text-center align-middle"><a href="<?= $router->generate('deleteCategory', ['id' =>  $category->id]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer <?= $category->cat ?> ?')"><img src="../../../public/images/trash-svgrepo-com.svg" alt="trash icon"></a></td>
                 </tr>

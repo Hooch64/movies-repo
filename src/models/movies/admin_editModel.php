@@ -1,13 +1,17 @@
 <?php
 
-function addMovie()
+/**
+ * Add new movie to db
+ * @param string $targetToSave
+ * @return void
+ */
+function addMovie($targetToSave)
 {
     global $db;
-    global $router;
 
     try {
-        $requeteAjout = "INSERT INTO movies (title, releaseDate, duration, synopsis, casting, director, pressRating) 
-        VALUES (:title, :releaseDate, :duration, :synopsis, :casting, :director, :pressRating)";
+        $requeteAjout = "INSERT INTO movies (title, releaseDate, duration, synopsis, casting, director, pressRating, poster, trailer, slug, category1, category2, category3) 
+        VALUES (:title, :releaseDate, :duration, :synopsis, :casting, :director, :pressRating, :poster, :trailer, :slug, :category1, :category2, :category3)";
         $ajouterFilm = $db->prepare($requeteAjout);
 
         $ajouterFilm->bindParam(':title', $_POST['title']);
@@ -17,20 +21,27 @@ function addMovie()
         $ajouterFilm->bindParam(':casting', $_POST['casting']);
         $ajouterFilm->bindParam(':director', $_POST['director']);
         $ajouterFilm->bindParam(':pressRating', $_POST['pressRating']);
+        $ajouterFilm->bindParam(':poster', $targetToSave);
+        $ajouterFilm->bindParam(':trailer', $_POST['trailer']);
+        $ajouterFilm->bindParam(':slug', renameFile($_POST['title']));
+        $ajouterFilm->bindParam(':category1', $_POST['category1']);
+        $ajouterFilm->bindParam(':category2', $_POST['category2']);
+        $ajouterFilm->bindParam(':category3', $_POST['category3']);
 
         $ajouterFilm->execute();
-
-        header('Location: ' . $router->generate('moviesList'));
-        die;
     } catch (PDOException $e) {
         dump($e->getMessage());
         die;
     }
 }
 
-function updateMovie()
+/**
+ * Update existing movie from db
+ * @param string $targetToSave
+ * @return void
+ */
+function updateMovie($targetToSave)
 {
-    global $router;
     global $db;
 
     $data = [
@@ -41,21 +52,62 @@ function updateMovie()
         'casting' => $_POST['casting'],
         'director' => $_POST['director'],
         'pressRating' => $_POST['pressRating'],
-        'id' => $_GET['id']
+        'trailer' => $_POST['trailer'],
+        'id' => $_GET['id'],
+        'slug' => renameFile($_POST['title']),
+        'category1' => $_POST['category1'],
+        'category2' => $_POST['category2'],
+        'category3' => $_POST['category3'],
     ];
 
+    if (!empty($targetToSave)) {
+
+        $data['poster'] = $targetToSave;
+        $requeteAjout = 'UPDATE movies SET 
+            title = :title,
+            releaseDate = :releaseDate,
+            director = :director,
+            casting = :casting,
+            synopsis = :synopsis,
+            duration = :duration,
+            pressRating = :pressRating,
+            poster = :poster,
+            trailer = :trailer,
+            slug = :slug,
+            category1 = :category1,
+            category2 = :category2,
+            category3 = :category3
+            WHERE id = :id';
+    } else {
+
+        $requeteAjout = 'UPDATE movies SET 
+            title = :title,
+            releaseDate = :releaseDate,
+            director = :director,
+            casting = :casting,
+            synopsis = :synopsis,
+            duration = :duration,
+            pressRating = :pressRating,
+            trailer = :trailer,
+            slug = :slug,
+            category1 = :category1,
+            category2 = :category2,
+            category3 = :category3
+            WHERE id = :id';
+    }
+
     try {
-        $requeteAjout = 'UPDATE movies SET title = :title, releaseDate = :releaseDate, duration = :duration, synopsis = :synopsis, casting = :casting, director = :director, pressRating = :pressRating WHERE id = :id';
         $query = $db->prepare($requeteAjout);
         $query->execute($data);
-        header('Location: ' . $router->generate('moviesList'));
-        die;
     } catch (PDOException $e) {
         dump($e->getMessage());
         die;
     }
 }
 
+/**
+ * Check if movie title already exists in db
+ */
 function checkAlreadyExistMovie(): mixed
 {
     global $db;
@@ -67,6 +119,12 @@ function checkAlreadyExistMovie(): mixed
     return $query->fetch();
 }
 
+/**
+ * Check if inserted date match format
+ * @param string $date
+ * @param string $format
+ * @return bool
+ */
 function validateDate($date, $format = 'Y-m-d')
 {
     $d = DateTime::createFromFormat($format, $date);
@@ -74,13 +132,16 @@ function validateDate($date, $format = 'Y-m-d')
     return $d && $d->format($format) === $date;
 }
 
+/**
+ * Retrieve ID from existing movie in case of an update
+ */
 function retrieveId()
 {
     global $db;
     $currentId = $_GET['id'];
 
     try {
-        $requete = "SELECT title, releaseDate, synopsis, casting, director, duration, pressRating FROM movies WHERE id= :id";
+        $requete = "SELECT title, releaseDate, synopsis, casting, director, duration, pressRating, poster, trailer FROM movies WHERE id= :id";
         $stmt = $db->prepare($requete);
         $stmt->bindParam(':id', $currentId);
         $stmt->execute();
@@ -90,3 +151,17 @@ function retrieveId()
         die;
     }
 }
+
+/**
+ * Get categories from db
+ */
+function getCategories()
+{
+    global $db;
+
+    $sql = "SELECT id, cat FROM categories";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $categories;
+};

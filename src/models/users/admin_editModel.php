@@ -1,27 +1,7 @@
 <?php
 
 /**
- * check if then email already exists in the database
- */
-function checkAlreadyExistEmail(): mixed
-{
-    global $db;
-    if (!empty($_GET['id'])) {
-        $email = getUser()->email;
-        if ($email === $_POST['email']) {
-            return false;
-        }
-    }
-    $requete = 'SELECT email FROM users WHERE email = :email';
-    $query = $db->prepare($requete);
-    $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-    $query->execute();
-
-    return $query->fetch();
-}
-
-/**
- * Add an user in the database
+ * Add new user in db
  */
 function addUser()
 {
@@ -49,7 +29,9 @@ function addUser()
     }
 }
 
-
+/**
+ * Update existing user from db
+ */
 function updateUser()
 {
     global $db;
@@ -74,6 +56,9 @@ function updateUser()
     }
 }
 
+/**
+ * Get user's email if it's already in db
+ */
 function getUser()
 {
     global $db;

@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Delete user from db
+ */
 function deleteUser()
 {
     global $db;
@@ -13,7 +17,7 @@ function deleteUser()
         header('Location: ' . $router->generate('userList'));
     } catch (PDOException $e) {
         if ($_ENV['DEBUG'] == 'true') {
-            dump($e->getMEssage());
+            dump($e->getMessage());
             die;
         } else {
             alert('Une erreur est survenue. Merci de réessayer plus tard.', 'danger');
@@ -21,6 +25,9 @@ function deleteUser()
     }
 }
 
+/**
+ * Retrieve user ID from db
+ */
 function getAlreadyExistId()
 {
     try {
@@ -40,6 +47,9 @@ function getAlreadyExistId()
     }
 }
 
+/**
+ * Count users in db
+ */
 function countUsers()
 {
     global $db;

@@ -43,6 +43,18 @@ $errorMessage = [
         'class' => false,
         'message' => false
     ],
+    'poster' =>
+    [
+        'state' => false,
+        'class' => false,
+        'message' => false
+    ],
+    'trailer' =>
+    [
+        'state' => false,
+        'class' => false,
+        'message' => false
+    ]
 ];
 
 $pageInfo = [
@@ -125,19 +137,77 @@ if (!empty($_POST)) {
         }
     }
 
+
+
+    // dump($_FILES);
+
+    /**	
+     * Upload file
+     * 
+     * @param string $path to save file
+     * @param string $field name of input type file
+     */
+    function uploadFile(string $field, array $exts = ['jpg', 'png', 'jpeg'], int $maxSize = 2097152): string
+    {
+        return '';
+        // Check submit form with post method
+        if (empty($_FILES)) :
+            return '';
+        endif;
+
+        // Check not empty input file
+        if (empty($_FILES[$field]['name'])) :
+            return 'Merci d\'uploader un fichier';
+        endif;
+
+        // Check exts
+        $currentExt = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
+        $currentExt = strtolower($currentExt);
+        if (!in_array($currentExt, $exts)) :
+            $exts = implode(', ', $exts);
+            return 'Merci de charger un fichier avec l\'une de ces extensions : ' . $exts . '.';
+        endif;
+
+        // Check no error into current file
+        if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK) :
+            return 'Merci de sélectionner un autre fichier.';
+        endif;
+
+        // Check max size current file
+        if ($_FILES[$field]['size'] > $maxSize) :
+            return 'Merci de charger un fichier ne dépassant pas cette taille : ' . formatBytes($maxSize);
+        endif;
+    }
+
+    echo uploadFile('poster');
+
+
     // Save movie in database
-    if (!empty($_POST['title']) && !empty($_POST['releaseDate']) && !empty($_POST['synopsis']) && !empty($_POST['casting']) && !empty($_POST['director']) && !empty($_POST['duration']) && !empty($_POST['pressRating'])) {
+    if (!empty($_POST['title']) && !empty($_POST['releaseDate']) && !empty($_POST['synopsis']) && !empty($_POST['casting']) && !empty($_POST['director']) && !empty($_POST['duration']) && !empty($_POST['pressRating']) && !empty($_FILES)) {
         if (!$errorMessage['title']['state'] && !$errorMessage['releaseDate']['state'] && !$errorMessage['synopsis']['state'] && !$errorMessage['casting']['state'] && !$errorMessage['director']['state'] && !$errorMessage['duration']['state'] && !$errorMessage['pressRating']['state']) {
+
+            $targetToSave = '';
+            if (!empty($_FILES['poster']['name'])) {
+                $path = '../public/images';
+                $filename = pathinfo($_FILES['poster']['name'], PATHINFO_FILENAME);
+                $filename = renameFile($filename);
+                $currentExt = pathinfo($_FILES['poster']['name'], PATHINFO_EXTENSION);
+                $currentExt = strtolower($currentExt);
+                $targetToSave = $path . '/' . $filename . '.' . $currentExt;
+
+                move_uploaded_file($_FILES['poster']['tmp_name'], $targetToSave);
+            }
 
             if (!empty($_GET['id'])) {
                 alert('Film modifié avec succès.', 'success');
-                updateMovie();
+                updateMovie($targetToSave);
             } else {
                 alert('Film ajouté avec succès.', 'success');
-                addMovie();
+                addMovie($targetToSave);
             }
-
-            unset($_POST['email']);
+            resize($targetToSave, 250);
+            header('Location: ' . $router->generate('moviesList'));
+            die;
         } else {
             alert('Erreur lors de l\'ajout du film.');
         }
@@ -152,3 +222,5 @@ if (!empty($_POST)) {
         'button' => 'Modifier'
     ];
 }
+
+$categories = getCategories();

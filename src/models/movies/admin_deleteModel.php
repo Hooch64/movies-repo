@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Delete movie from db
+ */
 function deleteMovie()
 {
     global $db;

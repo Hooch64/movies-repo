@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Get all categories
+ * Get all categories from db
  */
 function getCategories()
 {

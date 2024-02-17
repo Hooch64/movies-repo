@@ -18,6 +18,11 @@ function checkEmptyFields($field, $message = 'Veuillez renseigner tous les champ
     return $result;
 }
 
+/**
+ * Get value back if edit is needed
+ * @param string $field
+ * @return string
+ */
 function getValue($field)
 {
     if (isset($_POST[$field])) {

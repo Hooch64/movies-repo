@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Delete a category from db
+ */
 function deleteCategory()
 {
     global $db;
@@ -13,7 +17,7 @@ function deleteCategory()
         header('Location: ' . $router->generate('categoriesList'));
     } catch (PDOException $e) {
         if ($_ENV['DEBUG'] == 'true') {
-            dump($e->getMEssage());
+            dump($e->getMessage());
             die;
         } else {
             alert('Une erreur est survenue. Merci de réessayer plus tard.', 'danger');

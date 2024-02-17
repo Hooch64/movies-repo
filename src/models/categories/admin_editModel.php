@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Add new category to db
+ */
 function addCategory()
 {
     global $db;
@@ -21,6 +24,9 @@ function addCategory()
     }
 }
 
+/**
+ * Check if there is already a category with same name in db
+ */
 function checkAlreadyExistCategory(): mixed
 {
     global $db;

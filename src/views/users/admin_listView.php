@@ -23,7 +23,7 @@ get_header('Liste des utilisateurs', 'admin'); ?>
         <?php foreach ($users as $user) {
             if (empty($_GET['search']) || (!empty($_GET['search']) && searchByName($user->email, $_GET['search']))) { ?>
                 <tr>
-                    <td class="align-middle"><a href="<?= $router->generate('userEdit', ['id' =>  $user->id]); ?>"><?= $user->email; ?></a></td>
+                    <td class="align-middle"><a href="<?= $router->generate('userEdit', ['id' =>  $user->id]); ?>"><?= htmlentities($user->email); ?></a></td>
                     <td class="text-center align-middle"><?= $user->role_id; ?></td>
                     <td class="align-middle"><?= $user->created; ?></td>
                     <td class="text-center align-middle"><a href="<?= $router->generate('deleteUser', ['id' =>  $user->id]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer <?= $user->email ?> ?')"><img src="../../../public/images/trash-svgrepo-com.svg" alt="trash icon"></a></td>

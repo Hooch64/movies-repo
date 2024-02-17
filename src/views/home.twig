@@ -1,0 +1,35 @@
+{% extends 'layouts/public.twig' %}
+
+{% block title %}Accueil | Cine Qua Non{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <main class="homePage">
+        <div class="title">
+            <h1>Les meilleurs films du moment</h1>
+        </div>
+        <div class="articles">
+            {% for movie in movies %}
+            {% if get.search is empty or searchByName(movie.title, get.search) %}
+            <article>
+                <a href="{{ getUrl('details', {'slug': movie.slug}) }}">
+                    <div class="posters">
+                        <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+                    </div>
+                    <div class="hiddenHover">
+                        <h3>{{ movie.title }}</h3>
+                        <p><span>Date de sortie : </span>{{ movie.releaseDate|date('d/m/Y') }}</p>
+                        <p><span>Durée : </span>{{ movie.duration }} min</p>
+                        <p><span>Réalisateur : </span>{{ movie.director }}</p>
+                        <p><span>Casting : </span>{{ movie.casting }}</p>
+                        <p><span>Note de la presse : </span>{{ movie.pressRating }} / 20</p>
+                    </div>
+                    <h2>{{ movie.title }}</h2>
+                </a>
+            </article>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+</div>
+{% endblock %}

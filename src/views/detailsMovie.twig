@@ -1,0 +1,30 @@
+{% extends '/layouts/public.twig' %}
+{% block title %}Détails du film {{ movie.title }} | Cine Qua Non{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="details-movie">
+        <div class="poster">
+            <img src="/{{ movie.poster }}" alt="{{ movie.title }}">
+        </div>
+        <div class="filmDetail">
+            <h1 class="title-main">{{ movie.title }}</h1>
+            <div class="elems">
+                <ul class="elem1">
+                    <li><span>Date de sortie : </span>{{ movie.releaseDate|date('d/m/Y') }}</li>
+                    <li><span>Durée : </span>{{ movie.duration }} min.</li>
+                    <li class="note-press"><span>Note de la presse : </span>{{ movie.pressRating }} / 20</li>
+                </ul>
+                <ul class="elem2">
+                    <li><span>Réalisé par : </span>{{ movie.director }}</li>
+                    <li><span>Avec : </span>{{ movie.casting }}</li>
+                </ul>
+            </div>
+            <p><span>Synopsis : </span><br>{{ movie.synopsis }}</p>
+        </div>
+        <iframe width="1200" height="675" src="{{ movie.trailer }}" title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+    </div>
+</div>
+{% endblock %}

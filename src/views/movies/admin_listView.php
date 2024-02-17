@@ -7,6 +7,8 @@
     <input type="submit" class="btn btn-secondary" style="height: 38px" value="Rechercher">
 </form>
 
+<a href="<?= $router->generate('moviesEdit') ?>" class="btn btn-success">Ajouter</a>
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
