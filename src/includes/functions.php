@@ -68,12 +68,12 @@ function checkAdmin(array $match, AltoRouter $router)
 /**
  * check if then email already exists in the database
  */
-function checkAlreadyExistEmail(): mixed
+function checkAlreadyExistEmail($emailToCheck): mixed
 {
     global $db;
     if (!empty($_GET['id'])) {
         $email = getUser()->email;
-        if ($email === $_POST['email']) {
+        if ($email === $emailToCheck) {
             return false;
         }
     }

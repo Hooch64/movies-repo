@@ -5,14 +5,19 @@ if (!isset($_SESSION['failedAttempts'])) {
 }
 
 if (!empty($_POST['email']) && !empty($_POST['pwd']) && empty($_POST['pseudo'])) {
-    if (checkAlreadyExistEmail()) {
-        $accessUser = checkUserAccess();
+    $email = htmlspecialchars($_POST['email']);
+    $password = $_POST['pwd'];
+    echo $email;
+    echo $password;
+    var_dump($_POST);
+
+    if (checkAlreadyExistEmail($email)) { // Assurez-vous que cette fonction accepte un paramètre email
+        $accessUser = checkUserAccess($email, $password); // Assurez-vous que cette fonction accepte des paramètres email et password
         if (!empty($accessUser)) {
-            $_SESSION['user'] =
-                [
-                    'id' => $accessUser,
-                    'lastLogin' => date('Y-m-d H:i:s')
-                ];
+            $_SESSION['user'] = [
+                'id' => $accessUser,
+                'lastLogin' => date('Y-m-d H:i:s')
+            ];
 
             saveLastLogin($accessUser);
 
@@ -21,14 +26,15 @@ if (!empty($_POST['email']) && !empty($_POST['pwd']) && empty($_POST['pseudo']))
             header('Location: ' . $router->generate('moviesList'));
             die;
         } else {
-            $_SESSION['failedAttempts'] = $_SESSION['failedAttempts'] + 1;
+            $_SESSION['failedAttempts'] += 1;
             alert('Identifiants incorrects');
         }
     } else {
-        $_SESSION['failedAttempts'] = $_SESSION['failedAttempts'] + 1;
+        $_SESSION['failedAttempts'] += 1;
         alert('Identifiants incorrects');
     }
 }
+
 // dump($_SESSION['failedAttempts']);
 // unset($_SESSION['ipBan']);
 

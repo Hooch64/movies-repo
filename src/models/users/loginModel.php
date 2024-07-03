@@ -3,16 +3,16 @@
 /**
  * Check if user can access admin according to infos in db
  */
-function checkUserAccess()
+function checkUserAccess($email, $password)
 {
     global $db;
     $sql = 'SELECT id, pwd FROM users WHERE email = :email';
     $query = $db->prepare($sql);
-    $query->execute(['email' => $_POST['email']]);
+    $query->execute(['email' => $email]);
 
     $user = $query->fetch();
 
-    if (password_verify($_POST['pwd'], $user->pwd)) {
+    if (password_verify($password, $user->pwd)) {
         return $user->id;
     } else {
         return false;

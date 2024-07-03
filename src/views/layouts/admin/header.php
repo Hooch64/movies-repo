@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body mb-4" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Admin - Cine Qua Non</a>
+                <a class="navbar-brand" href="#" style="cursor: default;">Admin - Cine Qua Non</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
