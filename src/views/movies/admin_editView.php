@@ -45,7 +45,7 @@
             <select id="category1" name="category1" class="form-control">
                 <option selected>--</option>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['cat'] ?>"><?= $category['cat'] ?></option>
+                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -54,7 +54,7 @@
             <select id="category2" name="category2" class="form-control">
                 <option selected>--</option>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['cat'] ?>"><?= $category['cat'] ?></option>
+                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -63,7 +63,7 @@
             <select id="category3" name="category3" class="form-control">
                 <option selected>--</option>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['cat'] ?>"><?= $category['cat'] ?></option>
+                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>

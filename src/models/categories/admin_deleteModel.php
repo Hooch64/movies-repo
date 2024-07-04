@@ -9,7 +9,7 @@ function deleteCategory()
     global $router;
 
     try {
-        $requete = 'DELETE FROM categories WHERE id = :id';
+        $requete = 'DELETE FROM genres WHERE id = :id';
         $query = $db->prepare($requete);
         $query->bindParam(':id', $_GET['id']);
         $query->execute();

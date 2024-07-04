@@ -49,9 +49,6 @@
             <label for="pseudo">Pseudo</label>
         </div>
         <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
-        <p class="mt-4 mb-3 text-body-secondary text-center">
-            <a href="<?= $router->generate('lostPassword'); ?>">Mot de passe oublié ?</a>
-        </p>
     </form>
 </div>
 

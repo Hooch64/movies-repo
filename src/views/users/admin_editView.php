@@ -11,6 +11,13 @@
         <?= $errorMessage['email'] ?>
     </div>
     <div class="mb-4">
+        <?php $error = checkEmptyFields('pseudo'); ?>
+        <label for="pseudo" class="form-label">Pseudo : *</label>
+        <input type="pseudo" name="pseudo" id="pseudo" value="<?= getValue('pseudo'); ?>" class="form-control <?= $error['class']; ?>">
+        <?= $error['message']; ?>
+        <?= $errorMessage['pseudo'] ?>
+    </div>
+    <div class="mb-4">
         <?php $error = checkEmptyFields('pwd'); ?>
         <label for="pwd" class="form-label">Mot de passe : *</label>
         <input type="password" name="pwd" id="pwd" class="form-control <?= $error['class']; ?>">

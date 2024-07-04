@@ -7,7 +7,7 @@ function getCategories()
 {
     global $db;
 
-    $sql = 'SELECT id, cat, created FROM categories';
+    $sql = 'SELECT id, name, created_at FROM genres';
     $query = $db->prepare($sql);
     $query->execute();
 

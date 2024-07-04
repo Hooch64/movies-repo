@@ -159,7 +159,7 @@ function getCategories()
 {
     global $db;
 
-    $sql = "SELECT id, cat FROM categories";
+    $sql = "SELECT id, name FROM genres";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);

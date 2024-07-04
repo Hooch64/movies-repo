@@ -7,7 +7,7 @@ function getUsers()
 {
     global $db;
 
-    $sql = 'SELECT id, email, role_id, created FROM users';
+    $sql = 'SELECT id, email, pseudo, created_at FROM users';
     $query = $db->prepare($sql);
     $query->execute();
 

@@ -6,7 +6,7 @@
 function getMovies()
 {
     global $db;
-    $sql = 'SELECT slug, title, poster, pressRating, casting, director, duration, releaseDate FROM movies ORDER BY created ASC';
+    $sql = 'SELECT slug, title, poster, pressRating, casting, director, duration, releaseDate FROM movies ORDER BY created_at ASC';
     $query = $db->prepare($sql);
     $query->execute();
 

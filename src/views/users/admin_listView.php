@@ -14,7 +14,7 @@ get_header('Liste des utilisateurs', 'admin'); ?>
     <thead>
         <tr>
             <th scope="col">Email</th>
-            <th class="text-center" scope="col">Statut</th>
+            <th class="text-center" scope="col">Pseudo</th>
             <th scope="col">Date de création du profil</th>
             <th class="text-center" scope="col">Supprimer</th>
         </tr>
@@ -24,8 +24,8 @@ get_header('Liste des utilisateurs', 'admin'); ?>
             if (empty($_GET['search']) || (!empty($_GET['search']) && searchByName($user->email, $_GET['search']))) { ?>
                 <tr>
                     <td class="align-middle"><a href="<?= $router->generate('userEdit', ['id' =>  $user->id]); ?>"><?= htmlentities($user->email); ?></a></td>
-                    <td class="text-center align-middle"><?= $user->role_id; ?></td>
-                    <td class="align-middle"><?= $user->created; ?></td>
+                    <td class="text-center align-middle"><?= $user->pseudo; ?></td>
+                    <td class="align-middle"><?= $user->created_at; ?></td>
                     <td class="text-center align-middle"><a href="<?= $router->generate('deleteUser', ['id' =>  $user->id]); ?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer <?= $user->email ?> ?')"><img src="../../../public/images/trash-svgrepo-com.svg" alt="trash icon"></a></td>
                 </tr>
             <?php } ?>

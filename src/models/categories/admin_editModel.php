@@ -9,14 +9,14 @@ function addCategory()
     global $router;
 
     try {
-        $requeteAjout = "INSERT INTO categories (cat) VALUES (:cat)";
+        $requeteAjout = "INSERT INTO genres (name) VALUES (:name)";
         $ajouterCategory = $db->prepare($requeteAjout);
 
-        $ajouterCategory->bindParam(':cat', $_POST['category']);
+        $ajouterCategory->bindParam(':name', $_POST['category']);
 
         $ajouterCategory->execute();
         alert('Catégorie ajouté avec succès.', 'success');
-        header('Location: https://movies.test/admin/categories/editer');
+        header('Location: ' . $router->generate('categoriesList'));
         die;
     } catch (PDOException $e) {
         dump($e->getMessage());
@@ -30,9 +30,9 @@ function addCategory()
 function checkAlreadyExistCategory(): mixed
 {
     global $db;
-    $requete = 'SELECT cat FROM categories WHERE cat = :cat';
+    $requete = 'SELECT name FROM genres WHERE name = :name';
     $query = $db->prepare($requete);
-    $query->bindParam(':cat', $_POST['category'], PDO::PARAM_STR);
+    $query->bindParam(':name', $_POST['category'], PDO::PARAM_STR);
     $query->execute();
 
     return $query->fetch();

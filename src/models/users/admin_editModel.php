@@ -9,13 +9,13 @@ function addUser()
     //Autre methode que le bindParam
     $data = [
         'email' => $_POST['email'],
-        'pwd' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
-        'role_id' => 1
+        'password' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
+        'pseudo' => $_POST['pseudo']
     ];
 
     try {
-        $requeteAjout = 'INSERT INTO users (id, email, pwd, role_id) 
-                    VALUES (UUID(), :email, :pwd, :role_id)';
+        $requeteAjout = 'INSERT INTO users (id, email, password, pseudo) 
+                    VALUES (UUID(), :email, :password, :pseudo)';
         $query = $db->prepare($requeteAjout);
         $query->execute($data);
         alert('Un utilisateur a bien été ajouté', 'success');
@@ -37,12 +37,13 @@ function updateUser()
     global $db;
     $data = [
         'email' => $_POST['email'],
-        'pwd' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
+        'pseudo' => $_POST['pseudo'],
+        'password' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),
         'id' => $_GET['id']
     ];
 
     try {
-        $requeteAjout = 'UPDATE users SET email = :email, pwd = :pwd WHERE id = :id';
+        $requeteAjout = 'UPDATE users SET email = :email, pseudo = :pseudo, password = :password WHERE id = :id';
         $query = $db->prepare($requeteAjout);
         $query->execute($data);
         alert('Un utilisateur a bien été modifié', 'success');
@@ -57,13 +58,13 @@ function updateUser()
 }
 
 /**
- * Get user's email if it's already in db
+ * Get user's email and pseudo if it's already in db
  */
 function getUser()
 {
     global $db;
     try {
-        $sql = 'SELECT email FROM users WHERE id = :id';
+        $sql = 'SELECT email, pseudo FROM users WHERE id = :id';
         $query = $db->prepare($sql);
         $query->bindParam(':id', $_GET['id']);
         $query->execute();
