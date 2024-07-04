@@ -7,16 +7,14 @@ if (!isset($_SESSION['failedAttempts'])) {
 if (!empty($_POST['email']) && !empty($_POST['pwd']) && empty($_POST['pseudo'])) {
     $email = htmlspecialchars($_POST['email']);
     $password = $_POST['pwd'];
-    echo $email;
-    echo $password;
-    var_dump($_POST);
 
-    if (checkAlreadyExistEmail($email)) { // Assurez-vous que cette fonction accepte un paramètre email
-        $accessUser = checkUserAccess($email, $password); // Assurez-vous que cette fonction accepte des paramètres email et password
+    if (checkAlreadyExistEmail($email)) {
+        $accessUser = checkUserAccess($email, $password);
         if (!empty($accessUser)) {
             $_SESSION['user'] = [
                 'id' => $accessUser,
-                'lastLogin' => date('Y-m-d H:i:s')
+                'lastLogin' => date('Y-m-d H:i:s'),
+
             ];
 
             saveLastLogin($accessUser);

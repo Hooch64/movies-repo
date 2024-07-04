@@ -43,27 +43,39 @@
         <div class="form-group col-md-4">
             <label for="category1">Categorie 1 *</label>
             <select id="category1" name="category1" class="form-control">
-                <option selected>--</option>
+                <?php if (!getValue('pressRating')) { ?>
+                    <option value="" selected>--</option>
+                <?php } else { ?>
+                    <option value="<?= $categoriesMovie[0]['id'] ?>" selected><?= $categoriesMovie[0]['name'] ?></option>
+                <?php } ?>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="form-group col-md-4">
             <label for="category2">Categorie 2</label>
             <select id="category2" name="category2" class="form-control">
-                <option selected>--</option>
+                <?php if (!getValue('pressRating') || count($categoriesMovie) < 2) { ?>
+                    <option value="" selected>--</option>
+                <?php } else { ?>
+                    <option value="<?= $categoriesMovie[1]['id'] ?>" selected><?= $categoriesMovie[1]['name'] ?></option>
+                <?php } ?>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="form-group col-md-4">
             <label for="category3">Categorie 3</label>
             <select id="category3" name="category3" class="form-control">
-                <option selected>--</option>
+                <?php if (!getValue('pressRating') || count($categoriesMovie) < 3) { ?>
+                    <option value="" selected>--</option>
+                <?php } else { ?>
+                    <option value="<?= $categoriesMovie[2]['id'] ?>" selected><?= $categoriesMovie[2]['name'] ?></option>
+                <?php } ?>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?= $category['name'] ?>"><?= $category['name'] ?></option>
+                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                 <?php } ?>
             </select>
         </div>

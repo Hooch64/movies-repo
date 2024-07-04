@@ -216,6 +216,7 @@ if (!empty($_POST)) {
     }
 } else if (!empty($_GET['id'])) {
     retrieveId();
+    $categoriesMovie = getCategoriesByID($_GET['id']);
     $pageInfo = [
         'pageTitle' => 'Modifier un film',
         'title' => 'Modifier un film',
