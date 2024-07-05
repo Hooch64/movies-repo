@@ -14,17 +14,17 @@
             <article>
                 <a href="{{ getUrl('details', {'slug': movie.slug}) }}">
                     <div class="posters">
-                        <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+                        <img src="{{ movie.poster|e }}" alt="{{ movie.title|e }}">
                     </div>
                     <div class="hiddenHover">
-                        <h3>{{ movie.title }}</h3>
+                        <h3>{{ movie.title|e }}</h3>
                         <p><span>Date de sortie : </span>{{ movie.releaseDate|date('d/m/Y') }}</p>
                         <p><span>Durée : </span>{{ movie.duration }} min</p>
-                        <p><span>Réalisateur : </span>{{ movie.director }}</p>
-                        <p><span>Casting : </span>{{ movie.casting }}</p>
+                        <p><span>Réalisateur : </span>{{ movie.director|e }}</p>
+                        <p><span>Casting : </span>{{ movie.casting|e }}</p>
                         <p><span>Note de la presse : </span>{{ movie.pressRating }} / 20</p>
                     </div>
-                    <h2>{{ movie.title }}</h2>
+                    <h2>{{ movie.title|e }}</h2>
                 </a>
             </article>
             {% endif %}

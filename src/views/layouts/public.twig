@@ -21,7 +21,8 @@
                 <img src="/images/logo_cine_qua_non.jpeg" width="120" height="120" alt="logo">
             </a>
             <form action="{{ getUrl('home') }}" method="get">
-                <input type="text" name="search" placeholder="Rechercher un film" class="search-bar">
+                <input type="text" name="search" value="{{ get.search|e }}" placeholder="Rechercher un film"
+                    class="search-bar">
                 <button type="submit" class="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="50" height="50">
                         <path
