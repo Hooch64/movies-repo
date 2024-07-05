@@ -13,5 +13,3 @@ if (!empty($data['get']['search'])) {
         return searchByName($movie->title, $search); // Utilisation de la notation objet
     });
 }
-
-echo $twig->render('home.twig', $data);
