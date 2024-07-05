@@ -7,7 +7,6 @@
  */
 function addMovie($targetToSave)
 {
-    dump($_POST);
     global $db;
 
     try {
