@@ -8,26 +8,34 @@ $errorMessage = [
 
 if (!empty($_POST)) {
 
-    // Check title validity
-    if (empty($_POST['category'])) {
-        $errorMessage['state'] = true;
-        $errorMessage['class'] = 'is-invalid';
-        $errorMessage['message'] = '<span class="invalid-feedback">Merci de renseigner ce champ</span>';
-    } elseif (checkAlreadyExistCategory()) {
-        $errorMessage['state'] = true;
-        $errorMessage['class'] = 'is-invalid';
-        $errorMessage['message'] = '<span class="invalid-feedback">Cette catégorie existe déjà</span>';
-    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+            alert('Une erreur est survenue.', 'danger');
+            header('Location: ' . $router->generate('categoriesList'));
+            die;
+        }
 
-    if (!empty($_POST['category'])) {
-        if (!$errorMessage['state']) {
+        // Check title validity
+        if (empty($_POST['category'])) {
+            $errorMessage['state'] = true;
+            $errorMessage['class'] = 'is-invalid';
+            $errorMessage['message'] = '<span class="invalid-feedback">Merci de renseigner ce champ</span>';
+        } elseif (checkAlreadyExistCategory()) {
+            $errorMessage['state'] = true;
+            $errorMessage['class'] = 'is-invalid';
+            $errorMessage['message'] = '<span class="invalid-feedback">Cette catégorie existe déjà</span>';
+        }
 
-            alert('Catégorie ajouté avec succès.', 'success');
-            addCategory();
+        if (!empty($_POST['category'])) {
+            if (!$errorMessage['state']) {
+
+                alert('Catégorie ajouté avec succès.', 'success');
+                addCategory();
+            } else {
+                alert('Erreur lors de l\'ajout de la catégorie.');
+            }
         } else {
             alert('Erreur lors de l\'ajout de la catégorie.');
         }
-    } else {
-        alert('Erreur lors de l\'ajout de la catégorie.');
     }
 }

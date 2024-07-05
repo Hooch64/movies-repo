@@ -189,3 +189,18 @@ function resize(string $targetToSave, int $size)
     $image->save($targetToSave);
     return $targetToSave;
 }
+
+// generate a new CSRF token
+function generateCSRFToken()
+{
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Génère un token aléatoire sécurisé
+    }
+    return $_SESSION['csrf_token'];
+}
+
+// check CSRF token validity
+function validateCSRFToken($token)
+{
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}

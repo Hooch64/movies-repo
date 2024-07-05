@@ -2,6 +2,7 @@
 
 <form class="container mt-5" style="max-width: 800px;" method="post" action="https://movies.test/admin/categories/editer">
     <h2 class="mb-4">Ajouter une catégorie</h2>
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
     <div class="row">
         <div class="form-group">
             <label for="category">Nouvelle catégorie</label>
