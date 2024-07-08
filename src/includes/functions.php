@@ -120,6 +120,7 @@ function logoutTimer()
             unset($_SESSION['user']);
             alert('Vous avez été déconnecté pour inactivité', 'danger');
             header('Location: ' . $router->generate('login'));
+            die;
         }
     }
 }
@@ -193,14 +194,24 @@ function resize(string $targetToSave, int $size)
 // generate a new CSRF token
 function generateCSRFToken()
 {
-    if (!isset($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Génère un token aléatoire sécurisé
-    }
-    return $_SESSION['csrf_token'];
+    $token = bin2hex(random_bytes(32));
+    $_SESSION['csrf_token'] = $token;
+    $_SESSION['csrf_token_expiry'] = time() + 1800; // 30 min
+    return $token;
 }
 
 // check CSRF token validity
 function validateCSRFToken($token)
 {
-    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+    if (isset($_SESSION['csrf_token']) && isset($_SESSION['csrf_token_expiry'])) {
+        if ($_SESSION['csrf_token'] === $token) {
+            if (time() <= $_SESSION['csrf_token_expiry']) {
+                return true;
+            } else {
+                unset($_SESSION['csrf_token']);
+                unset($_SESSION['csrf_token_expiry']);
+            }
+        }
+    }
+    return false;
 }

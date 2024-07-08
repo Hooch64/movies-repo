@@ -167,7 +167,6 @@ function checkAlreadyExistMovie(): mixed
 function validateDate($date, $format = 'Y-m-d')
 {
     $d = DateTime::createFromFormat($format, $date);
-    // Retourne true si la date est valide et correspond au format, false sinon
     return $d && $d->format($format) === $date;
 }
 
@@ -205,7 +204,9 @@ function getCategories()
     return $categories;
 };
 
-
+/**
+ * Get categories from db if a movie update is required
+ */
 function getCategoriesByID($id)
 {
     global $db;

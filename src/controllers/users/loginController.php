@@ -4,7 +4,10 @@ if (!isset($_SESSION['failedAttempts'])) {
     $_SESSION['failedAttempts'] = 0;
 }
 
-if (!empty($_POST['email']) && !empty($_POST['pwd']) && empty($_POST['pseudo'])) {
+if (!empty($_POST['pseudo'])) {
+    alert('Connexion réussie', 'success');
+    die;
+} elseif (!empty($_POST['email']) && !empty($_POST['pwd']) && empty($_POST['pseudo'])) {
     $email = htmlspecialchars($_POST['email']);
     $password = $_POST['pwd'];
 

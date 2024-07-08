@@ -12,8 +12,9 @@ if (!empty($_POST)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
             alert('Une erreur est survenue.', 'danger');
-            header('Location: ' . $router->generate('userList'));
-            die("Erreur CSRF détectée. Action bloquée.");
+            unset($_SESSION['user']);
+            header('Location: ' . $router->generate('login'));
+            die;
         }
 
         // Check email format and if already exists
@@ -45,7 +46,7 @@ if (!empty($_POST)) {
                     addUser();
                 }
                 header('Location: ' . $router->generate('userList'));
-                unset($_POST['email']);
+                die;
             } else {
                 alert('Erreur lors de l\'ajout de l\'utilisateur.');
             }
@@ -55,4 +56,6 @@ if (!empty($_POST)) {
     }
 } else if (!empty($_GET['id'])) {
     $_POST = (array) getUser();
-}
+};
+
+$csrfToken = generateCSRFToken();

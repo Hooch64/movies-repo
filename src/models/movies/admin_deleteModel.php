@@ -14,6 +14,7 @@ function deleteMovie()
         $query->bindParam(':id', $_GET['id']);
         $query->execute();
         header('Location: ' . $router->generate('moviesList'));
+        die;
     } catch (PDOException $e) {
         dump($e->getMessage());
         die;

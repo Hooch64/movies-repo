@@ -1,9 +1,9 @@
-<?php get_header('Editer un utilisateur', 'admin'); ?>
+<?php get_header('Ajouter un utilisateur', 'admin'); ?>
 
-<h1 class="mb-4">Editer un utilisateur</h1>
+<h1 class="mb-4">Ajouter un utilisateur</h1>
 
 <form action="" method="post" novalidate>
-    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
     <div class="mb-4">
         <?php $error = checkEmptyFields('email'); ?>
         <label for="email" class="form-label">Adresse email : *</label>

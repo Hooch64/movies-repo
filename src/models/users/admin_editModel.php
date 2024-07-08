@@ -6,7 +6,6 @@
 function addUser()
 {
     global $db;
-    //Autre methode que le bindParam
     $data = [
         'email' => $_POST['email'],
         'password' => password_hash($_POST['pwd'], PASSWORD_DEFAULT),

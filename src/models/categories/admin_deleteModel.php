@@ -15,6 +15,7 @@ function deleteCategory()
         $query->execute();
         alert('la catégorie a bien été supprimée', 'success');
         header('Location: ' . $router->generate('categoriesList'));
+        die;
     } catch (PDOException $e) {
         if ($_ENV['DEBUG'] == 'true') {
             dump($e->getMessage());

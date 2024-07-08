@@ -15,6 +15,7 @@ function deleteUser()
         $query->execute();
         alert('l\'utilisateur a bien été supprimé', 'success');
         header('Location: ' . $router->generate('userList'));
+        die;
     } catch (PDOException $e) {
         if ($_ENV['DEBUG'] == 'true') {
             dump($e->getMessage());
